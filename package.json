@@ -1,0 +1,24 @@
+{
+  "name": "imagesviewer",
+  "version": "1.0.0",
+  "description": "\"Images Viewer on React\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaulMartynov/imagesViewer.git"
+  },
+  "keywords": [
+    "Images",
+    "Viewer",
+    "React"
+  ],
+  "author": "Paul Martynov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PaulMartynov/imagesViewer/issues"
+  },
+  "homepage": "https://github.com/PaulMartynov/imagesViewer#readme"
+}
