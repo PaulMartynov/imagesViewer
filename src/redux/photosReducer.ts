@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createAction, createSlice } from "@reduxjs/toolkit";
 import { deletePhoto, getPhotos } from "../api/jsonplaceholder";
 
 export const getPhotosAction = createAsyncThunk(
@@ -16,6 +16,12 @@ export const removePhoto = createAsyncThunk(
     return { id, data };
   }
 );
+
+export const setAlbumId = createAction("photos/setAlbumId", (id: number) => {
+  return {
+    payload: id,
+  };
+});
 
 const photosReducerSlice = createSlice({
   name: "photos",
@@ -44,6 +50,14 @@ const photosReducerSlice = createSlice({
         state.photos = state.photos.filter(
           (photo) => photo.id !== action.payload.id
         );
+      }
+    });
+
+    builder.addCase(setAlbumId, (state, action) => {
+      if (action.payload === 0) {
+        state.fetchOptions = {};
+      } else {
+        state.fetchOptions.albumId = action.payload;
       }
     });
   },

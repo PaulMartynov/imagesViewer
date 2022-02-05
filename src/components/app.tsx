@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { ReturnState } from "../redux/store";
-import { getPhotosAction, removePhoto } from "../redux/photosReducer";
+import {
+  getPhotosAction,
+  removePhoto,
+  setAlbumId,
+} from "../redux/photosReducer";
 import Pagination from "./pagination";
+import Filter from "./filter";
+import { generateNumbers } from "../utils/generateArray";
 
 const mapStateToProps = (state: ReturnState) => ({
   photos: state.photos,
@@ -11,6 +17,7 @@ const mapStateToProps = (state: ReturnState) => ({
 const mapDispatchToProps = {
   getPhotosAction,
   removePhoto,
+  setAlbumId,
 };
 
 function App(
@@ -22,6 +29,7 @@ function App(
     if (pageNum > 0 && pageNum <= 500) {
       props.getPhotosAction({
         _page: pageNum,
+        ...props.photos.fetchOptions,
       });
 
       setCurrentPage(pageNum);
@@ -36,17 +44,24 @@ function App(
     toCurrentPage(currentPage - 1);
   };
 
+  const selectAlbum = (id: number) => {
+    props.setAlbumId(id);
+  };
+
   useEffect(() => {
-    toCurrentPage(1);
-  }, []);
+    toCurrentPage(currentPage);
+  }, [props.photos.fetchOptions]);
 
   return (
     <>
       <header />
       <main className={"albums"}>
-        <div className={"albums__filter"}>
-          <select />
-        </div>
+        <Filter
+          isLoading={props.photos.isLoading}
+          optionName={"Album"}
+          options={generateNumbers()}
+          onSelect={selectAlbum}
+        />
         <Pagination
           min={1}
           max={500}
