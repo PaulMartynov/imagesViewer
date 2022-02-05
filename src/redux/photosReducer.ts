@@ -20,7 +20,6 @@ export const removePhoto = createAsyncThunk(
 const photosReducerSlice = createSlice({
   name: "photos",
   initialState: {
-    currentPage: 1,
     photos: [] as IPhoto[],
     fetchOptions: {} as RequestOptions,
     isLoading: false,
@@ -33,7 +32,6 @@ const photosReducerSlice = createSlice({
     builder.addCase(getPhotosAction.fulfilled, (state, action) => {
       if (action.payload.success) {
         state.photos = action.payload.data;
-        state.currentPage += 1;
       }
       state.isLoading = false;
     });
