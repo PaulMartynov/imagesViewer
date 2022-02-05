@@ -2,7 +2,7 @@
   "name": "imagesviewer",
   "version": "1.0.0",
   "description": "Images Viewer on React",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
