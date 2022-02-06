@@ -14,6 +14,7 @@ import Filter from "./filter";
 import { generateNumbers } from "../utils/generateArray";
 import PhotoCard from "./photoCard";
 import "./main.scss";
+import ModalWindow from "./ModalWindow";
 
 const mapStateToProps = (state: ReturnState) => ({
   photos: state.photos,
@@ -29,6 +30,8 @@ function App(
   props: ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
 ): JSX.Element {
   const [currentPage, setCurrentPage] = useState(1);
+  const [activePhotoWindow, setActivePhotoWindow] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState(props.photos.photos[0]);
 
   const toCurrentPage = (pageNum: number) => {
     if (pageNum > 0 && pageNum <= 500) {
@@ -51,6 +54,16 @@ function App(
 
   const selectAlbum = (id: number) => {
     props.setAlbumId(id);
+  };
+
+  const clickOnPhoto = (photo: IPhoto) => {
+    setSelectedPhoto(photo);
+    setActivePhotoWindow(true);
+  };
+
+  const deletePhoto = (id: number) => {
+    props.removePhoto(id);
+    setActivePhotoWindow(false);
   };
 
   useEffect(() => {
@@ -93,13 +106,21 @@ function App(
             {props.photos.photos.map((photo) => (
               <React.Fragment key={photo.id}>
                 <Grid item>
-                  <PhotoCard photo={photo} />
+                  <PhotoCard photo={photo} onClick={clickOnPhoto} />
                 </Grid>
               </React.Fragment>
             ))}
           </Grid>
         </Box>
       </main>
+      <ModalWindow
+        isOpen={activePhotoWindow}
+        photo={selectedPhoto}
+        deletePhoto={deletePhoto}
+        setClose={() => {
+          setActivePhotoWindow(false);
+        }}
+      />
     </Container>
   );
 }

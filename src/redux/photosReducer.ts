@@ -51,6 +51,7 @@ const photosReducerSlice = createSlice({
           (photo) => photo.id !== action.payload.id
         );
       }
+      state.isLoading = false;
     });
 
     builder.addCase(setAlbumId, (state, action) => {
