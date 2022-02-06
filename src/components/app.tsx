@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { ReturnState } from "../redux/store";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import { Grid } from "@mui/material";
 import {
   getPhotosAction,
   removePhoto,
   setAlbumId,
 } from "../redux/photosReducer";
+import { ReturnState } from "../redux/store";
 import Pagination from "./pagination";
 import Filter from "./filter";
 import { generateNumbers } from "../utils/generateArray";
+import PhotoCard from "./photoCard";
 
 const mapStateToProps = (state: ReturnState) => ({
   photos: state.photos,
@@ -54,31 +58,40 @@ function App(
 
   return (
     <>
-      <header />
+      <header>
+        <Stack spacing={2} direction="row">
+          <Filter
+            isLoading={props.photos.isLoading}
+            optionName={"Album"}
+            options={generateNumbers()}
+            onSelect={selectAlbum}
+          />
+          <Pagination
+            min={1}
+            max={500}
+            isLoading={props.photos.isLoading}
+            currentPage={currentPage}
+            nextPage={nextPage}
+            prevPage={prevPage}
+            toCurrentPage={toCurrentPage}
+          />
+        </Stack>
+      </header>
       <main className={"albums"}>
-        <Filter
-          isLoading={props.photos.isLoading}
-          optionName={"Album"}
-          options={generateNumbers()}
-          onSelect={selectAlbum}
-        />
-        <Pagination
-          min={1}
-          max={500}
-          isLoading={props.photos.isLoading}
-          currentPage={currentPage}
-          nextPage={nextPage}
-          prevPage={prevPage}
-          toCurrentPage={toCurrentPage}
-        />
         <div className={"albums__loader"}>
           {props.photos.isLoading ? "Loading..." : ""}
         </div>
-        <div className={"albums__content"}>
-          {props.photos.photos.map((photo) => (
-            <img key={photo.id} src={photo.thumbnailUrl} alt={photo.title} />
-          ))}
-        </div>
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={2}>
+            {props.photos.photos.map((photo) => (
+              <React.Fragment key={photo.id}>
+                <Grid item>
+                  <PhotoCard photo={photo} />
+                </Grid>
+              </React.Fragment>
+            ))}
+          </Grid>
+        </Box>
       </main>
     </>
   );

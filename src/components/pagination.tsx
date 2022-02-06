@@ -1,4 +1,6 @@
 import React from "react";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
 type PaginationProps = {
   nextPage: () => void;
@@ -12,15 +14,16 @@ type PaginationProps = {
 
 export default function Pagination(props: PaginationProps): JSX.Element {
   return (
-    <div className={"pagination"}>
-      <button
+    <Stack direction="row">
+      <Button
         disabled={props.isLoading}
         onClick={() => {
           props.prevPage();
         }}
+        variant="contained"
       >
-        {"Prev"}
-      </button>
+        Prev
+      </Button>
       <input
         value={props.currentPage}
         type={"number"}
@@ -35,15 +38,15 @@ export default function Pagination(props: PaginationProps): JSX.Element {
           }
         }}
       />
-      <span>{`/ ${props.max}`}</span>
-      <button
+      <Button
         disabled={props.isLoading}
         onClick={() => {
           props.nextPage();
         }}
+        variant="contained"
       >
-        {"Next"}
-      </button>
-    </div>
+        Next
+      </Button>
+    </Stack>
   );
 }

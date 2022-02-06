@@ -1,4 +1,8 @@
 import React from "react";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import NativeSelect from "@mui/material/NativeSelect";
 
 type FilterProps = {
   optionName: string;
@@ -9,32 +13,42 @@ type FilterProps = {
 
 export default function Filter(props: FilterProps): JSX.Element {
   return (
-    <div className={"filter"}>
-      <select
-        disabled={props.isLoading}
-        onChange={(event) => {
-          const album = Number(event.target.value);
-          if (!Number.isNaN(album)) {
-            props.onSelect(album);
-          }
-        }}
-      >
-        {props.options.map((option, index) => {
-          if (index === 0) {
+    <Box sx={{ width: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel variant="standard" htmlFor="uncontrolled-native">
+          {props.optionName}
+        </InputLabel>
+        <NativeSelect
+          disabled={props.isLoading}
+          onChange={(event) => {
+            const album = Number(event.target.value);
+            if (!Number.isNaN(album)) {
+              props.onSelect(album);
+            }
+          }}
+          defaultValue={0}
+          inputProps={{
+            name: props.optionName,
+            id: "uncontrolled-native",
+          }}
+        >
+          {props.options.map((option, index) => {
+            if (index === 0) {
+              return (
+                <option key={`option-${option}`} value={option} selected>
+                  {"All"}
+                </option>
+              );
+            }
             return (
-              <option key={`option-${option}`} value={option} selected>
-                {"All"}
-              </option>
+              <option
+                key={`option-${option}`}
+                value={option}
+              >{`${props.optionName} #${option}`}</option>
             );
-          }
-          return (
-            <option
-              key={`option-${option}`}
-              value={option}
-            >{`${props.optionName} #${option}`}</option>
-          );
-        })}
-      </select>
-    </div>
+          })}
+        </NativeSelect>
+      </FormControl>
+    </Box>
   );
 }
