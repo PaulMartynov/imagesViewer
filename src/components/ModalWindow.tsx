@@ -45,7 +45,9 @@ export default function ModalWindow(props: ModalWindowProps): JSX.Element {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={deleteFn}>Delete</Button>
+        <Button color="error" onClick={deleteFn}>
+          Delete
+        </Button>
         <Button onClick={handleClose} autoFocus>
           Close
         </Button>
