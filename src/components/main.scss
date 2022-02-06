@@ -1,0 +1,10 @@
+.photo-card {
+  padding: 5px;
+  border: 2px solid lightgray;
+  border-radius: 6px;
+  transition: 200ms linear;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
+}

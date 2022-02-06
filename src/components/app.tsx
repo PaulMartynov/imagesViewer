@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import { Grid } from "@mui/material";
+import { Container, Grid, LinearProgress } from "@mui/material";
 import {
   getPhotosAction,
   removePhoto,
@@ -13,6 +13,7 @@ import Pagination from "./pagination";
 import Filter from "./filter";
 import { generateNumbers } from "../utils/generateArray";
 import PhotoCard from "./photoCard";
+import "./main.scss";
 
 const mapStateToProps = (state: ReturnState) => ({
   photos: state.photos,
@@ -57,9 +58,15 @@ function App(
   }, [props.photos.fetchOptions]);
 
   return (
-    <>
+    <Container>
       <header>
-        <Stack spacing={2} direction="row">
+        <Stack
+          paddingTop={2}
+          paddingBottom={2}
+          spacing={2}
+          direction={"row"}
+          alignItems="center"
+        >
           <Filter
             isLoading={props.photos.isLoading}
             optionName={"Album"}
@@ -78,9 +85,9 @@ function App(
         </Stack>
       </header>
       <main className={"albums"}>
-        <div className={"albums__loader"}>
-          {props.photos.isLoading ? "Loading..." : ""}
-        </div>
+        <Box paddingBottom={2}>
+          {props.photos.isLoading ? <LinearProgress /> : null}
+        </Box>
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
             {props.photos.photos.map((photo) => (
@@ -93,7 +100,7 @@ function App(
           </Grid>
         </Box>
       </main>
-    </>
+    </Container>
   );
 }
 

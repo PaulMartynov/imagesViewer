@@ -5,5 +5,9 @@ type PhotoCardProps = {
 };
 
 export default function PhotoCard(props: PhotoCardProps): JSX.Element {
-  return <img src={props.photo.thumbnailUrl} alt={props.photo.title} />;
+  return (
+    <div className={"photo-card"}>
+      <img src={props.photo.thumbnailUrl} alt={props.photo.title} />
+    </div>
+  );
 }
