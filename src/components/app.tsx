@@ -16,6 +16,7 @@ import PhotoCard from "./photoCard";
 import "./main.scss";
 import ModalWindow from "./ModalWindow";
 import ConfirmWindow from "./ConfirmWindow";
+import AlertWindow from "./AlertWindow";
 
 const mapStateToProps = (state: ReturnState) => ({
   photos: state.photos,
@@ -33,6 +34,7 @@ function App(
   const [currentPage, setCurrentPage] = useState(1);
   const [activePhotoWindow, setActivePhotoWindow] = useState(false);
   const [activeConfirmWindow, setActiveConfirmWindow] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(props.photos.photos[0]);
 
   const toCurrentPage = (pageNum: number) => {
@@ -76,6 +78,12 @@ function App(
   useEffect(() => {
     toCurrentPage(currentPage);
   }, [props.photos.fetchOptions]);
+
+  useEffect(() => {
+    if (props.photos.errorMessage !== "") {
+      setAlertOpen(true);
+    }
+  }, [props.photos.errorMessage]);
 
   return (
     <Container>
@@ -135,6 +143,14 @@ function App(
         }}
         message={"Are you sure you want to delete this image?"}
         confirmedAction={deletePhoto}
+      />
+      <AlertWindow
+        isOpen={alertOpen}
+        type={"error"}
+        message={props.photos.errorMessage}
+        setClose={() => {
+          setAlertOpen(false);
+        }}
       />
     </Container>
   );

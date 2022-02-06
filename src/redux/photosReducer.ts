@@ -29,6 +29,7 @@ const photosReducerSlice = createSlice({
     photos: [] as IPhoto[],
     fetchOptions: {} as RequestOptions,
     isLoading: false,
+    errorMessage: "",
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -38,6 +39,10 @@ const photosReducerSlice = createSlice({
     builder.addCase(getPhotosAction.fulfilled, (state, action) => {
       if (action.payload.success) {
         state.photos = action.payload.data;
+        state.errorMessage = "";
+      }
+      if (!action.payload.success) {
+        state.errorMessage = "Error! Can't load photos!";
       }
       state.isLoading = false;
     });
@@ -50,6 +55,10 @@ const photosReducerSlice = createSlice({
         state.photos = state.photos.filter(
           (photo) => photo.id !== action.payload.id
         );
+        state.errorMessage = "";
+      }
+      if (!action.payload.data.success) {
+        state.errorMessage = "Error! Can't delete this photo!";
       }
       state.isLoading = false;
     });

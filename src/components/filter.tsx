@@ -26,7 +26,7 @@ export default function Filter(props: FilterProps): JSX.Element {
               props.onSelect(album);
             }
           }}
-          defaultValue={0}
+          defaultValue={props.options[0]}
           inputProps={{
             name: props.optionName,
             id: "uncontrolled-native",
