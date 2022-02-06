@@ -12,8 +12,13 @@ export default function PhotoCard(props: PhotoCardProps): JSX.Element {
       onClick={() => {
         props.onClick(props.photo);
       }}
+      data-testid={`photo-card`}
     >
-      <img src={props.photo.thumbnailUrl} alt={props.photo.title} />
+      <img
+        data-testid={`photo-card-img`}
+        src={props.photo.thumbnailUrl}
+        alt={props.photo.title}
+      />
     </div>
   );
 }

@@ -9,14 +9,14 @@ import {
   setAlbumId,
 } from "../redux/photosReducer";
 import { ReturnState } from "../redux/store";
-import Pagination from "./pagination";
-import Filter from "./filter";
+import Pagination from "./pagination/pagination";
+import Filter from "./filter/filter";
 import { generateNumbers } from "../utils/generateArray";
-import PhotoCard from "./photoCard";
+import PhotoCard from "./PhotoCard/photoCard";
 import "./main.scss";
-import ModalWindow from "./ModalWindow";
-import ConfirmWindow from "./ConfirmWindow";
-import AlertWindow from "./AlertWindow";
+import ModalWindow from "./ModalWindows/ModalWindow";
+import ConfirmWindow from "./ModalWindows/ConfirmWindow";
+import AlertWindow from "./ModalWindows/AlertWindow";
 
 const mapStateToProps = (state: ReturnState) => ({
   photos: state.photos,

@@ -28,16 +28,23 @@ export default function ConfirmWindow(props: ModalWindowProps): JSX.Element {
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
+      data-testid={`confirm-window`}
     >
       <DialogTitle id="alert-dialog-title">{`Confirm Action`}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          {props.message}
+          <span data-testid={`confirm-window-message`}>{props.message}</span>
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={deleteFn}>Yes</Button>
-        <Button onClick={handleClose} autoFocus>
+        <Button data-testid={`confirm-window-yes`} onClick={deleteFn}>
+          Yes
+        </Button>
+        <Button
+          data-testid={`confirm-window-no`}
+          onClick={handleClose}
+          autoFocus
+        >
           No
         </Button>
       </DialogActions>

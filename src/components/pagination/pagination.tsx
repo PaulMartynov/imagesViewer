@@ -16,6 +16,7 @@ export default function Pagination(props: PaginationProps): JSX.Element {
   return (
     <Stack direction="row">
       <Button
+        data-testid={`pagination-prev`}
         disabled={props.isLoading}
         onClick={() => {
           props.prevPage();
@@ -25,6 +26,7 @@ export default function Pagination(props: PaginationProps): JSX.Element {
         Prev
       </Button>
       <input
+        data-testid={`pagination-current`}
         value={props.currentPage}
         type={"number"}
         min={props.min}
@@ -39,6 +41,7 @@ export default function Pagination(props: PaginationProps): JSX.Element {
         }}
       />
       <Button
+        data-testid={`pagination-next`}
         disabled={props.isLoading}
         onClick={() => {
           props.nextPage();

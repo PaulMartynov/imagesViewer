@@ -19,6 +19,7 @@ export default function Filter(props: FilterProps): JSX.Element {
           {props.optionName}
         </InputLabel>
         <NativeSelect
+          data-testid={`filter-test`}
           disabled={props.isLoading}
           onChange={(event) => {
             const album = Number(event.target.value);

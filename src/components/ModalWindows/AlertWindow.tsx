@@ -23,6 +23,7 @@ export default function AlertWindow(props: AlertWindowProps): JSX.Element {
   return (
     <Snackbar open={props.isOpen} autoHideDuration={6000} onClose={handleClose}>
       <Alert
+        data-testid={`alert-window`}
         variant="filled"
         onClose={handleClose}
         severity={props.type}
