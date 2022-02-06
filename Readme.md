@@ -6,7 +6,7 @@
 
 ## app for viewing some images from jsonplaseholder
 
-Link to view: [https://paulmartynov.github.io/imagesviewer/][link-1]
+Link to view: [https://paulmartynov.github.io/imagesViewer/][link-1]
 
 Install: <br>
 `npm install`
@@ -17,4 +17,4 @@ Start dev-server: <br>
 Build: <br>
 `npm run build`
 
-[link-1]: https://paulmartynov.github.io/imagesviewer/
+[link-1]: https://paulmartynov.github.io/imagesViewer/
