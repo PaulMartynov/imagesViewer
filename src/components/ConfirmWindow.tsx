@@ -9,19 +9,17 @@ import DialogTitle from "@mui/material/DialogTitle";
 type ModalWindowProps = {
   isOpen: boolean;
   setClose: () => void;
-  photo: IPhoto | undefined;
-  deletePhoto: () => void;
+  confirmedAction: () => void;
+  message: string;
 };
 
-export default function ModalWindow(props: ModalWindowProps): JSX.Element {
+export default function ConfirmWindow(props: ModalWindowProps): JSX.Element {
   const handleClose = () => {
     props.setClose();
   };
 
   const deleteFn = () => {
-    if (props.photo) {
-      props.deletePhoto();
-    }
+    props.confirmedAction();
   };
 
   return (
@@ -31,23 +29,16 @@ export default function ModalWindow(props: ModalWindowProps): JSX.Element {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">{`#${
-        props.photo?.id ?? ""
-      }`}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">{`Confirm Action`}</DialogTitle>
       <DialogContent>
-        <img
-          width={"100%"}
-          src={props.photo?.url ?? ""}
-          alt={`photo #${props.photo?.id ?? ""}`}
-        />
         <DialogContentText id="alert-dialog-description">
-          {props.photo?.title ?? ""}
+          {props.message}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={deleteFn}>Delete</Button>
+        <Button onClick={deleteFn}>Yes</Button>
         <Button onClick={handleClose} autoFocus>
-          Close
+          No
         </Button>
       </DialogActions>
     </Dialog>

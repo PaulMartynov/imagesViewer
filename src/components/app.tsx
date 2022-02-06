@@ -15,6 +15,7 @@ import { generateNumbers } from "../utils/generateArray";
 import PhotoCard from "./photoCard";
 import "./main.scss";
 import ModalWindow from "./ModalWindow";
+import ConfirmWindow from "./ConfirmWindow";
 
 const mapStateToProps = (state: ReturnState) => ({
   photos: state.photos,
@@ -31,6 +32,7 @@ function App(
 ): JSX.Element {
   const [currentPage, setCurrentPage] = useState(1);
   const [activePhotoWindow, setActivePhotoWindow] = useState(false);
+  const [activeConfirmWindow, setActiveConfirmWindow] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(props.photos.photos[0]);
 
   const toCurrentPage = (pageNum: number) => {
@@ -61,9 +63,14 @@ function App(
     setActivePhotoWindow(true);
   };
 
-  const deletePhoto = (id: number) => {
-    props.removePhoto(id);
+  const confirmDeletingPhoto = () => {
     setActivePhotoWindow(false);
+    setActiveConfirmWindow(true);
+  };
+
+  const deletePhoto = () => {
+    props.removePhoto(selectedPhoto.id);
+    setActiveConfirmWindow(false);
   };
 
   useEffect(() => {
@@ -116,10 +123,18 @@ function App(
       <ModalWindow
         isOpen={activePhotoWindow}
         photo={selectedPhoto}
-        deletePhoto={deletePhoto}
+        deletePhoto={confirmDeletingPhoto}
         setClose={() => {
           setActivePhotoWindow(false);
         }}
+      />
+      <ConfirmWindow
+        isOpen={activeConfirmWindow}
+        setClose={() => {
+          setActiveConfirmWindow(false);
+        }}
+        message={"Are you sure you want to delete this image?"}
+        confirmedAction={deletePhoto}
       />
     </Container>
   );
