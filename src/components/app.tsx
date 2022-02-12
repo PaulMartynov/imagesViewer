@@ -113,7 +113,7 @@ function App(
         </Stack>
       </header>
       <main className={"albums"}>
-        <Box paddingBottom={2}>
+        <Box className={"albums__loader"} paddingBottom={2}>
           {props.photos.isLoading ? <LinearProgress /> : null}
         </Box>
         <Box sx={{ flexGrow: 1 }}>

@@ -9,6 +9,9 @@
   }
 }
 .albums {
-  max-height: 90vh;
+  height: 90vh;
   overflow-y: auto;
+  &__loader {
+    min-height: 5px;
+  }
 }
