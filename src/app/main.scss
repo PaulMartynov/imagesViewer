@@ -4,6 +4,10 @@
   border-radius: 6px;
   transition: 200ms linear;
   cursor: pointer;
+  img {
+    width: 150px;
+    height: 150px;
+  }
   &:hover {
     transform: scale(1.1);
   }
@@ -14,4 +18,11 @@
   &__loader {
     min-height: 5px;
   }
+}
+.photo-image {
+  width: 600px;
+  height: 600px;
+}
+.px-8 {
+  padding: 0 8px;
 }
