@@ -31,6 +31,7 @@ export default function ModalWindow(props: ModalWindowProps): JSX.Element {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
       data-testid={`modal-window`}
+      maxWidth={"lg"}
     >
       <DialogTitle id="alert-dialog-title" data-testid={`modal-window-id`}>{`#${
         props.photo?.id ?? ""
@@ -38,6 +39,7 @@ export default function ModalWindow(props: ModalWindowProps): JSX.Element {
       <DialogContent>
         <img
           data-testid={`modal-window-img`}
+          className={"photo-image"}
           width={"100%"}
           src={props.photo?.url ?? ""}
           alt={`photo #${props.photo?.id ?? ""}`}

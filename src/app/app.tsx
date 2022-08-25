@@ -7,16 +7,16 @@ import {
   getPhotosAction,
   removePhoto,
   setAlbumId,
-} from "../redux/photosReducer";
-import { ReturnState } from "../redux/store";
-import Pagination from "./pagination/pagination";
-import Filter from "./filter/filter";
-import { generateNumbers } from "../utils/generateArray";
-import PhotoCard from "./PhotoCard/photoCard";
+} from "./redux/photosReducer";
+import { ReturnState } from "./redux/store";
+import Pagination from "./components/pagination/pagination";
+import Filter from "./components/filter/filter";
+import { generateNumbers } from "./utils/generateArray";
+import PhotoCard from "./components/PhotoCard/photoCard";
 import "./main.scss";
-import ModalWindow from "./ModalWindows/ModalWindow";
-import ConfirmWindow from "./ModalWindows/ConfirmWindow";
-import AlertWindow from "./ModalWindows/AlertWindow";
+import ModalWindow from "./components/ModalWindows/ModalWindow";
+import ConfirmWindow from "./components/ModalWindows/ConfirmWindow";
+import AlertWindow from "./components/ModalWindows/AlertWindow";
 
 const mapStateToProps = (state: ReturnState) => ({
   photos: state.photos,
@@ -116,7 +116,7 @@ function App(
         <Box className={"albums__loader"} paddingBottom={2}>
           {props.photos.isLoading ? <LinearProgress /> : null}
         </Box>
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1 }} className={"px-8"}>
           <Grid container spacing={2}>
             {props.photos.photos.map((photo) => (
               <React.Fragment key={photo.id}>
